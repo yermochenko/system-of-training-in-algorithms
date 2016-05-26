@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import by.vsu.mf.amm.sta.method.Method;
+import by.vsu.mf.amm.sta.method.example.MatrixMultiplicationMethod;
 import by.vsu.mf.amm.sta.method.operation.Operation;
+import by.vsu.mf.amm.sta.method.operation.example.CalculateScalarProductOperation;
+import by.vsu.mf.amm.sta.method.operation.example.CreateEmptyResultMatrixOperation;
 import by.vsu.mf.amm.sta.problem.Problem;
 import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 import by.vsu.mf.amm.sta.problem.generator.ProblemGenerator;
@@ -16,10 +19,15 @@ public class Container {
 	private static Map<Class<? extends Problem>, Map<Class<? extends Method<?>>, ProblemGenerator<?, ?>>> generators;
 
 	static {
+		List<Wrapper<? extends Operation<?, ?>>> operations;
 		Map<Wrapper<? extends Method<?>>, List<Wrapper<? extends Operation<?, ?>>>> methods;
 		problems = new LinkedHashMap<>();
 		generators = new LinkedHashMap<>();
+		operations = new ArrayList<>();
+		operations.add(new Wrapper<>(CreateEmptyResultMatrixOperation.class, "Создание матрицы результата указанного размера (или размера 0 на 0, если результат вычислен быть не может)"));
+		operations.add(new Wrapper<>(CalculateScalarProductOperation.class, "Вычисление скалярного произведения двух векторов и запись значения в результирующую матрицу"));
 		methods = new LinkedHashMap<>();
+		methods.put(new Wrapper<>(MatrixMultiplicationMethod.class, "Метод непосредственного умножения двух прямоугольных матриц"), operations);
 		problems.put(new Wrapper<>(MatrixMultiplicationProblem.class, "Задача перемножения двух матриц"), methods);
 	}
 
