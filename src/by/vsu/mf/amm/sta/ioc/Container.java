@@ -8,6 +8,7 @@ import java.util.Map;
 import by.vsu.mf.amm.sta.method.Method;
 import by.vsu.mf.amm.sta.method.operation.Operation;
 import by.vsu.mf.amm.sta.problem.Problem;
+import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 import by.vsu.mf.amm.sta.problem.generator.ProblemGenerator;
 
 public class Container {
@@ -15,8 +16,11 @@ public class Container {
 	private static Map<Class<? extends Problem>, Map<Class<? extends Method<?>>, ProblemGenerator<?, ?>>> generators;
 
 	static {
+		Map<Wrapper<? extends Method<?>>, List<Wrapper<? extends Operation<?, ?>>>> methods;
 		problems = new LinkedHashMap<>();
 		generators = new LinkedHashMap<>();
+		methods = new LinkedHashMap<>();
+		problems.put(new Wrapper<>(MatrixMultiplicationProblem.class, "Задача перемножения двух матриц"), methods);
 	}
 
 	public static List<Wrapper<? extends Problem>> getProblems() {
