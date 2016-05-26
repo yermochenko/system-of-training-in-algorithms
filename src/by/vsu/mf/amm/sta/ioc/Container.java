@@ -13,6 +13,7 @@ import by.vsu.mf.amm.sta.method.operation.example.CreateEmptyResultMatrixOperati
 import by.vsu.mf.amm.sta.problem.Problem;
 import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 import by.vsu.mf.amm.sta.problem.generator.ProblemGenerator;
+import by.vsu.mf.amm.sta.problem.generator.example.MatrixMultiplicationProblemGenerator;
 
 public class Container {
 	private static Map<Wrapper<? extends Problem>, Map<Wrapper<? extends Method<?>>, List<Wrapper<? extends Operation<?, ?>>>>> problems;
@@ -21,6 +22,7 @@ public class Container {
 	static {
 		List<Wrapper<? extends Operation<?, ?>>> operations;
 		Map<Wrapper<? extends Method<?>>, List<Wrapper<? extends Operation<?, ?>>>> methods;
+		Map<Class<? extends Method<?>>, ProblemGenerator<?, ?>> generator;
 		problems = new LinkedHashMap<>();
 		generators = new LinkedHashMap<>();
 		operations = new ArrayList<>();
@@ -29,6 +31,9 @@ public class Container {
 		methods = new LinkedHashMap<>();
 		methods.put(new Wrapper<>(MatrixMultiplicationMethod.class, "Метод непосредственного умножения двух прямоугольных матриц"), operations);
 		problems.put(new Wrapper<>(MatrixMultiplicationProblem.class, "Задача перемножения двух матриц"), methods);
+		generator = new LinkedHashMap<>();
+		generator.put(MatrixMultiplicationMethod.class, new MatrixMultiplicationProblemGenerator());
+		generators.put(MatrixMultiplicationProblem.class, generator);
 	}
 
 	public static List<Wrapper<? extends Problem>> getProblems() {

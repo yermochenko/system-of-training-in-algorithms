@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import by.vsu.mf.amm.sta.console.visualizer.VisualizerContainer;
+import by.vsu.mf.amm.sta.exception.operation.IncorrectOperandOperationException;
+import by.vsu.mf.amm.sta.exception.operation.IncorrectOperationException;
+import by.vsu.mf.amm.sta.exception.operation.MatrixSizeException;
 import by.vsu.mf.amm.sta.exception.operation.OperationException;
 import by.vsu.mf.amm.sta.exception.visualization.VisualizationException;
 import by.vsu.mf.amm.sta.ioc.Container;
@@ -98,6 +101,12 @@ public class Runner {
 					} catch(IndexOutOfBoundsException e) {
 						System.out.println("Операции с таким номером нет в списке");
 					} catch(VisualizationException e) {
+					} catch(IncorrectOperationException e) {
+						System.out.println("Неверно выбрана операция");
+					} catch(MatrixSizeException e) {
+						System.out.println("Неверно указан размер матрицы-результата");
+					} catch(IncorrectOperandOperationException e) {
+						System.out.println("Неверно заданы параметры операции");
 					} catch(OperationException e) {
 						System.out.println("Неизвестная ошибка выполнения операции");
 					}
