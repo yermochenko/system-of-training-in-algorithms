@@ -4,19 +4,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import by.vsu.mf.amm.sta.console.visualizer.example.MatrixMultiplicationProblemVisualizer;
+import by.vsu.mf.amm.sta.console.visualizer.example.operation.CalculateScalarProductOperationVisualizer;
+import by.vsu.mf.amm.sta.console.visualizer.example.operation.CreateEmptyResultMatrixOperationVisualizer;
 import by.vsu.mf.amm.sta.method.Method;
 import by.vsu.mf.amm.sta.method.operation.Operation;
+import by.vsu.mf.amm.sta.method.operation.example.CalculateScalarProductOperation;
+import by.vsu.mf.amm.sta.method.operation.example.CreateEmptyResultMatrixOperation;
 import by.vsu.mf.amm.sta.problem.Problem;
+import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 
 public class VisualizerContainer {
 	private static Map<Class<? extends Problem>, ProblemVisualizer<?, ?>> problemsVisualizers = new HashMap<>();
 
 	static {
+		problemsVisualizers.put(MatrixMultiplicationProblem.class, new MatrixMultiplicationProblemVisualizer());
 	}
 
 	private static Map<Class<? extends Operation<?, ?>>, OperationVisualizer<?>> operationsVisualizers = new HashMap<>();
 
 	static {
+		operationsVisualizers.put(CalculateScalarProductOperation.class, new CalculateScalarProductOperationVisualizer());
+		operationsVisualizers.put(CreateEmptyResultMatrixOperation.class, new CreateEmptyResultMatrixOperationVisualizer());
 	}
 
 	@SuppressWarnings("unchecked")
