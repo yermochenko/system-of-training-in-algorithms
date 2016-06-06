@@ -6,13 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import by.vsu.mf.amm.sta.method.Method;
+import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.TridiagonalMatrixAlgorithm;
 import by.vsu.mf.amm.sta.method.example.MatrixMultiplicationMethod;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CalculateMethodCoefficientsOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CalculateResultVectorOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CreateEmptyResultVectorOperation;
 import by.vsu.mf.amm.sta.method.operation.Operation;
 import by.vsu.mf.amm.sta.method.operation.example.CalculateScalarProductOperation;
 import by.vsu.mf.amm.sta.method.operation.example.CreateEmptyResultMatrixOperation;
 import by.vsu.mf.amm.sta.problem.Problem;
+import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblem;
 import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 import by.vsu.mf.amm.sta.problem.generator.ProblemGenerator;
+import by.vsu.mf.amm.sta.problem.generator.SystemOfLinearEquationsProblemGenerators.SystemOfLinearEquationsProblemGenerator;
 import by.vsu.mf.amm.sta.problem.generator.example.MatrixMultiplicationProblemGenerator;
 
 public class Container {
@@ -28,12 +34,24 @@ public class Container {
 		operations = new ArrayList<>();
 		operations.add(new Wrapper<>(CreateEmptyResultMatrixOperation.class, "Создание матрицы результата указанного размера (или размера 0 на 0, если результат вычислен быть не может)"));
 		operations.add(new Wrapper<>(CalculateScalarProductOperation.class, "Вычисление скалярного произведения двух векторов и запись значения в результирующую матрицу"));
+
+		operations.add(new Wrapper<>(CreateEmptyResultVectorOperation.class, "Проверка условия и создание вектора ответов"));
+	    operations.add(new Wrapper<>(CalculateMethodCoefficientsOperation.class, "Вычисление коэффициентов метода прогонки"));
+		operations.add(new Wrapper<>(CalculateResultVectorOperation.class, "Вычисление результатов методом прогонки"));
+
 		methods = new LinkedHashMap<>();
 		methods.put(new Wrapper<>(MatrixMultiplicationMethod.class, "Метод непосредственного умножения двух прямоугольных матриц"), operations);
+		methods.put(new Wrapper<>(TridiagonalMatrixAlgorithm.class, "Метод прогонки"), operations);
+
 		problems.put(new Wrapper<>(MatrixMultiplicationProblem.class, "Задача перемножения двух матриц"), methods);
+		
+		problems.put(new Wrapper<>(SystemOfLinearEquationsProblem.class, "Система линейных алгебраических уравнений"), methods);
 		generator = new LinkedHashMap<>();
 		generator.put(MatrixMultiplicationMethod.class, new MatrixMultiplicationProblemGenerator());
+
+		generator.put(TridiagonalMatrixAlgorithm.class, new SystemOfLinearEquationsProblemGenerator());
 		generators.put(MatrixMultiplicationProblem.class, generator);
+		generators.put(SystemOfLinearEquationsProblem.class, generator);
 	}
 
 	public static List<Wrapper<? extends Problem>> getProblems() {
