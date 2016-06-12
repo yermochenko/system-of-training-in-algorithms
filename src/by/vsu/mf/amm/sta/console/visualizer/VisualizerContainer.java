@@ -14,6 +14,9 @@ import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisual
 import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSeidelMethod.SystemOfLinearEquationsProblemVisualizerSeidelMethod;
 import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSeidelMethod.operation.CalculateSeidelMethodOperationVisualizer;
 import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSeidelMethod.operation.CreateEmptyResultSeldelVectorOperationVisualizer;
+import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSimpleIteration.SystemOfLinearEquationsProblemVisualizerSimpleIteration;
+import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSimpleIteration.operation.CalculateSimpleIterationOperationVisualizer;
+import by.vsu.mf.amm.sta.console.visualizer.systemOfLinearEquationsProblemVisualizerSimpleIteration.operation.CreateEmptyResultSimpleIterationVectorOperationVisualizer;
 import by.vsu.mf.amm.sta.method.Method;
 import by.vsu.mf.amm.sta.method.operation.Operation;
 import by.vsu.mf.amm.sta.method.operation.example.CalculateScalarProductOperation;
@@ -23,9 +26,12 @@ import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CreateEmptyResultVectorOperation;
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.seidelAlgorithmOperations.CalculateSeidelMethodOperation;
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.seidelAlgorithmOperations.CreateEmptyResultSeidelVectorOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.simpleIterationAlgorithmOperations.CalculateSimpleIterationOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.simpleIterationAlgorithmOperations.CreateEmptyResultSimpleIterationVectorOperation;
 import by.vsu.mf.amm.sta.problem.Problem;
 import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblem;
 import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSeidelMethod;
+import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSimpleIterationMethod;
 import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 
 public class VisualizerContainer {
@@ -35,7 +41,7 @@ public class VisualizerContainer {
         problemsVisualizers.put(MatrixMultiplicationProblem.class, new MatrixMultiplicationProblemVisualizer());
         problemsVisualizers.put(SystemOfLinearEquationsProblem.class, new SystemOfLinearEquationsProblemVisualizer());
         problemsVisualizers.put(SystemOfLinearEquationsProblemSeidelMethod.class, new SystemOfLinearEquationsProblemVisualizerSeidelMethod());
-
+        problemsVisualizers.put(SystemOfLinearEquationsProblemSimpleIterationMethod.class, new SystemOfLinearEquationsProblemVisualizerSimpleIteration());
          /*
          * bug одинаковых проблем в problemsVisualizers
          * 
@@ -57,6 +63,9 @@ public class VisualizerContainer {
 
         operationsVisualizers.put(CreateEmptyResultSeidelVectorOperation.class,  new CreateEmptyResultSeldelVectorOperationVisualizer());
         operationsVisualizers.put(CalculateSeidelMethodOperation.class, new CalculateSeidelMethodOperationVisualizer());
+        
+        operationsVisualizers.put(CreateEmptyResultSimpleIterationVectorOperation.class,  new CreateEmptyResultSimpleIterationVectorOperationVisualizer());
+        operationsVisualizers.put(CalculateSimpleIterationOperation.class, new CalculateSimpleIterationOperationVisualizer());
     }
 
     @SuppressWarnings("unchecked")

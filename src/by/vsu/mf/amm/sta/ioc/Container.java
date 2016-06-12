@@ -7,6 +7,7 @@ import java.util.Map;
 
 import by.vsu.mf.amm.sta.method.Method;
 import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.seidelAlgorithm.SeidelAlgorithm;
+import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.simpleIteration.SimpleIteration;
 import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.TridiagonalMatrixAlgorithm;
 import by.vsu.mf.amm.sta.method.example.MatrixMultiplicationMethod;
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CalculateMethodCoefficientsOperation;
@@ -14,16 +15,20 @@ import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.tridiagonalMatrixAlgorithmOperations.CreateEmptyResultVectorOperation;
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.seidelAlgorithmOperations.CalculateSeidelMethodOperation;
 import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.seidelAlgorithmOperations.CreateEmptyResultSeidelVectorOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.simpleIterationAlgorithmOperations.CalculateSimpleIterationOperation;
+import by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods.simpleIterationAlgorithmOperations.CreateEmptyResultSimpleIterationVectorOperation;
 import by.vsu.mf.amm.sta.method.operation.Operation;
 import by.vsu.mf.amm.sta.method.operation.example.CalculateScalarProductOperation;
 import by.vsu.mf.amm.sta.method.operation.example.CreateEmptyResultMatrixOperation;
 import by.vsu.mf.amm.sta.problem.Problem;
 import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblem;
 import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSeidelMethod;
+import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSimpleIterationMethod;
 import by.vsu.mf.amm.sta.problem.example.MatrixMultiplicationProblem;
 import by.vsu.mf.amm.sta.problem.generator.ProblemGenerator;
 import by.vsu.mf.amm.sta.problem.generator.SystemOfLinearEquationsProblemGenerators.SystemOfLinearEquationsProblemGenerator;
 import by.vsu.mf.amm.sta.problem.generator.SystemOfLinearEquationsProblemGenerators.SystemOfLinearEquationsSeidelProblemGenerator;
+import by.vsu.mf.amm.sta.problem.generator.SystemOfLinearEquationsProblemGenerators.SystemOfLinearEquationsSimpleIterationProblemGenerator;
 import by.vsu.mf.amm.sta.problem.generator.example.MatrixMultiplicationProblemGenerator;
 
 public class Container {
@@ -44,15 +49,19 @@ public class Container {
 		operations.add(new Wrapper<>(CalculateResultVectorOperation.class, "Вычисление результатов методом прогонки"));
 		operations.add(new Wrapper<>(CreateEmptyResultSeidelVectorOperation.class,"Проверка условия метода Зейделя и создание вектора ответов"));
 		operations.add(new Wrapper<>(CalculateSeidelMethodOperation.class,"Вычисление метода Зейделя"));
+		operations.add(new Wrapper<>(CreateEmptyResultSimpleIterationVectorOperation.class,"Проверка условия метода простой итерации и создание вектора ответов"));
+		operations.add(new Wrapper<>(CalculateSimpleIterationOperation.class,"Вычисление метода простой итерации"));
 
 		methods = new LinkedHashMap<>();
 		methods.put(new Wrapper<>(MatrixMultiplicationMethod.class, "Метод непосредственного умножения двух прямоугольных матриц"), operations);
 		methods.put(new Wrapper<>(TridiagonalMatrixAlgorithm.class, "Метод прогонки"), operations);
 		methods.put(new Wrapper<>(SeidelAlgorithm.class,"Метод Зейделя"), operations);
+		methods.put(new Wrapper<>(SimpleIteration.class,"Метод простой итерации"), operations);
 
 		problems.put(new Wrapper<>(MatrixMultiplicationProblem.class, "Задача перемножения двух матриц"), methods);		
 		problems.put(new Wrapper<>(SystemOfLinearEquationsProblem.class, "Система линейных алгебраических уравнений"), methods);
 		problems.put(new Wrapper<>(SystemOfLinearEquationsProblemSeidelMethod.class, "Метод Зейделя"), methods);
+		problems.put(new Wrapper<>(SystemOfLinearEquationsProblemSimpleIterationMethod.class, "Метод простой итерации"), methods);
 		/*
 		 * bug одинаковых проблем в problems
 		 */
@@ -60,10 +69,12 @@ public class Container {
 		generator.put(MatrixMultiplicationMethod.class, new MatrixMultiplicationProblemGenerator());
 		generator.put(TridiagonalMatrixAlgorithm.class, new SystemOfLinearEquationsProblemGenerator());
 		generator.put(SeidelAlgorithm.class, new SystemOfLinearEquationsSeidelProblemGenerator());
+		generator.put(SimpleIteration.class, new SystemOfLinearEquationsSimpleIterationProblemGenerator());
 		
 		generators.put(MatrixMultiplicationProblem.class, generator);
 		generators.put(SystemOfLinearEquationsProblem.class, generator);
 		generators.put(SystemOfLinearEquationsProblemSeidelMethod.class, generator);
+		generators.put(SystemOfLinearEquationsProblemSimpleIterationMethod.class, generator);
 		/*
          * bug одинаковых проблем в generators
          */
