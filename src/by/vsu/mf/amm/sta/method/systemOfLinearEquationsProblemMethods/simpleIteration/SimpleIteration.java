@@ -6,13 +6,13 @@ import by.vsu.mf.amm.sta.method.Method;
 import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSimpleIterationMethod;;
 
 public class SimpleIteration extends Method<SystemOfLinearEquationsProblemSimpleIterationMethod> {
-    private int accuracy; // точность
-    private int quantity; // размерность
+    private int accuracy;
+    private int quantity;
 
-    private UsualMatrix matrixB; // Б
+    private UsualMatrix matrixB;
 
-    private Vector approximateVector; //Х1
-    private Vector vectorG; // Г
+    private Vector approximateVector;
+    private Vector vectorG;
 
     private boolean diagonallyDominantMatrix = false;
 
