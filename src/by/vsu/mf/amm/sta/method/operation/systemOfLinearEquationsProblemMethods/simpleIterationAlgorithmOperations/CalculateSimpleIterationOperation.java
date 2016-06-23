@@ -2,11 +2,10 @@ package by.vsu.mf.amm.sta.method.operation.systemOfLinearEquationsProblemMethods
 
 import by.vsu.mf.amm.sta.exception.operation.IncorrectOperationException;
 import by.vsu.mf.amm.sta.exception.operation.OperationException;
-import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.simpleIteration.SimpleIteration;
-import by.vsu.mf.amm.sta.method.operation.Operation;
-import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSimpleIterationMethod;
-import by.vsu.mf.amm.sta.math.object.UsualMatrix;
 import by.vsu.mf.amm.sta.math.object.Vector;
+import by.vsu.mf.amm.sta.method.operation.Operation;
+import by.vsu.mf.amm.sta.method.systemOfLinearEquationsProblemMethods.simpleIteration.SimpleIteration;
+import by.vsu.mf.amm.sta.problem.SystemOfLinearEquationsProblemSimpleIterationMethod;
 
 public class CalculateSimpleIterationOperation
         extends Operation<SystemOfLinearEquationsProblemSimpleIterationMethod, SimpleIteration> {
